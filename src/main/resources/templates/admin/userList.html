@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="admin/navbar.html :: adminMenu(link='user')"></nav>
+<div class="container">
+    <h4 class="mt-4 mb-4">User List</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td><b>Full Name</b></td>
+                        <td><b>Phone Number</b></td>
+                        <td><b>Email Address</b></td>
+                        <td><b>Password</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="scrda : ${useradtalist}">
+                        <td th:text="${scrda.userId}"></td>
+                        <td th:text="${scrda.firstName+' '+scrda.lastName}"></td>
+                        <td th:text="${scrda.phoneNumber}"></td>
+                        <td th:text="${scrda.emailAddress}"></td>
+                        <td th:text="${scrda.password}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

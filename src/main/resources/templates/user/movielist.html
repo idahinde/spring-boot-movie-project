@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie List | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="user/userNav.html :: userNavigationLink(link='movies')"></nav>
+<div class="container">
+    <div class="row">
+        <div th:if="${msgsuc!=null}" class="alert alert-success" th:text="${msgsuc}"></div>
+        <div th:if="${msgerr!=null}" class="alert alert-danger" th:text="${msgerr}"></div>
+        <div class="col-md-3" th:each="mobda : ${moviedatalistref}">
+            <div class="card">
+                <div class="card-title">
+                    <h4 class="card-text text-center mt-2" th:text="${mobda.title}"></h4>
+                </div>
+                <div class="card-body">
+                    <img th:src="${mobda.imageData}" height="180" width="200"/>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Cinema:</td>
+                                <td th:text="${mobda.screen.cinema.cinemaName}"></td>
+                            </tr>
+                            <tr>
+                                <td>Screen:</td>
+                                <td th:text="${mobda.screen.type}"></td>
+                            </tr>
+                            <tr>
+                                <td>Release Date:</td>
+                                <td th:text="${mobda.releaseDate}"></td>
+                            </tr>
+                            <tr>
+                                <td>Show Cycle:</td>
+                                <td th:text="${mobda.showCycle}"></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <form method="post" action="/postMovieBook">
+                                        <input type="hidden" name="userId" th:value="${session.userId}"/>
+                                        <input type="hidden" name="movieId" th:value="${mobda.movieId}"/>
+                                        <button type="submit" class="btn btn-success">Book Ticket</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

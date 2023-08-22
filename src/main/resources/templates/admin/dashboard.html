@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="admin/navbar.html :: adminMenu(link='dashboard')"></nav>
+<div class="container">
+    <h1>Cinema Booking System</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td><b>Description</b></td>
+                <td width="85"><b>Link</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Create Or View Cinema List</td>
+                <td><a href="/adminCinema">View</a></td>
+            </tr>
+            <tr>
+                <td>Create Or View Cinema Screen List</td>
+                <td><a href="/adminScreen">View</a></td>
+            </tr>
+            <tr>
+                <td>Create Or View Cinema Released Movie</td>
+                <td><a href="/adminMovie">View</a></td>
+            </tr>
+            <tr>
+                <td>View Movie Booking List</td>
+                <td><a href="/adminMovieBookingList">View</a></td>
+            </tr>
+            <tr>
+                <td>View All User </td>
+                <td><a href="/adminUserList">View</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

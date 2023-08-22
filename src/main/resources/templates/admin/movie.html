@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="admin/navbar.html :: adminMenu(link='movie')"></nav>
+<div class="container">
+    <h4 class="mt-4 mb-4">Movie</h4>
+    <div class="row">
+        <div class="col-md-5">
+            <div th:if="${msgsuc!=null}" class="alert alert-success" th:text="${msgsuc}"></div>
+            <div th:if="${msgerr!=null}" class="alert alert-danger" th:text="${msgerr}"></div>
+            <form method="post" action="/saveMovie" enctype="multipart/form-data" id="frmmoviewName">
+                <div class="row mb-3">
+                    <label class="col-md-4 text-sm-end" for="screen.screenId">Screen Type:</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="screen.screenId" name="screen.screenId">
+                            <option value="0">-</option>
+                            <option th:each="s : ${screendata}" th:value="${s.screenId}" th:text="${s.type}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-4 text-sm-end" for="title">Title:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title"/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-4 text-sm-end" for="releaseDate">Release Date:</label>
+                    <div class="col-md-8">
+                        <input type="date" class="form-control" id="releaseDate" name="releaseDate"
+                               placeholder="Release Date"/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-4 text-sm-end" for="showCycle">Show Cycle:</label>
+                    <div class="col-md-8">
+                        <input type="number" class="form-control" id="showCycle" name="showCycle"
+                               placeholder="Show Cycle"/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-4 text-sm-end" for="movieImage">Movie Image:</label>
+                    <div class="col-md-8">
+                        <input type="file" class="form-control" id="movieImage" name="movieImage"
+                               placeholder="Movie Image"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 offset-md-6">
+                        <button class="float-end btn btn-success"><i class="fa fa-save me-2"></i>Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-7">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td><b>Image</b></td>
+                        <td><b>Title</b></td>
+                        <td><b>Screen Type</b></td>
+                        <td><b>Release Date</b></td>
+                        <td><b>Show Cycle</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="mrda, obj : ${moviedata}">
+                        <td th:text="${obj.index+1}"></td>
+                        <td><img th:src="${mrda.imageData}" width="45" height="45"/></td>
+                        <td th:text="${mrda.title}"></td>
+                        <td th:text="${mrda.screen.type}"></td>
+                        <td th:text="${mrda.releaseDate}"></td>
+                        <td th:text="${mrda.showCycle}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="script.html"></script>
+<script>
+    $.validator.addMethod('fileSize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param * 1000000)
+    }, 'File size must be less than {0} MB');
+
+    $(document).ready(function () {
+        $("#frmmoviewName").validate({
+            errorClass: "text-danger",
+            rules: {
+                title: "required",
+                releaseDate: "required",
+                showCycle: "required",
+                "screen.screenId": {min: 1},
+                movieImage: {
+                    required: true,
+                    extension: "jpg|jpeg|png|gif",
+                    fileSize: 1
+                }
+            },
+            messages: {
+                title: "Enter Movie Title",
+                releaseDate: "Enter Release Date",
+                showCycle: "Enter Show Cycle",
+                "screen.screenId": "Select Screen Type",
+                movieImage: {
+                    required: "Select Movie Image",
+                    extension: "Select Valid Image",
+                    fileSize: "Select Image less than 1MB"
+                }
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>
+</body>
+</html>

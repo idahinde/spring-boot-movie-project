@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="nav.html :: navigationForm(link='admin')"></nav>
+<div class="container">
+    <form method="post" action="/adminLoginEvent">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h4 class=" mt-4">Admin Login</h4>
+                <p>&nbsp;</p>
+                <div th:if="${msgerr!=null}" class="alert alert-danger" th:text="${msgerr}"></div>
+                <div class="row mb-3">
+                    <label class="col-md-3 text-sm-end" for="emailAddress">Username:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="emailAddress" name="emailAddress"
+                               placeholder="Email Address"/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 text-sm-end" for="password">Password:</label>
+                    <div class="col-md-8">
+                        <input type="password" id="password" name="password" class="form-control"
+                               placeholder="Password"/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="float-end">
+                            <a class="btn btn-primary border border-1" href="/adminRegister">Admin Register</a>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="float-end">
+                            <button class="btn btn-success"><i class="fa fa-sign-in me-1"></i>Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

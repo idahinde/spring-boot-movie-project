@@ -1,0 +1,19 @@
+<nav th:fragment="userNavigationLink (link)" class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a href="/userMovieList" class="navbar-brand">Cinema Booking System</a>
+        <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item"><a href="/userMovieList" th:class="${(link=='movies')?'active nav-link':'nav-link'}">Movies</a></li>
+                <li class="nav-item"><a href="/userMovieBookingList" th:class="${(link=='movbie-booking')?'active nav-link':'nav-link'}">Movie Booking</a></li>
+            </ul>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><span class="nav-link" th:text="${session.userFirstName+' '+session.userLastName}"></span></li>
+                <li class="nav-item"><a href="/userLogout" class="nav-link"><i class="fa fa-sign-out me-2"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

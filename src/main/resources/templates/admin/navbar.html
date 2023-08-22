@@ -1,0 +1,21 @@
+<nav th:fragment="adminMenu (link)" class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a href="/adminDashboard" class="navbar-brand">Cinema Booking System</a>
+        <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item"><a href="/adminCinema" th:class="${(link=='cinema')?'active nav-link':'nav-link'}">Cinema</a></li>
+                <li class="nav-item"><a href="/adminScreen" th:class="${(link=='screen')?'active nav-link':'nav-link'}">Screen</a></li>
+                <li class="nav-item"><a href="/adminMovie" th:class="${(link=='movie')?'active nav-link':'nav-link'}">Movie</a></li>
+                <li class="nav-item"><a href="/adminMovieBookingList" th:class="${(link=='movbie-booking')?'active nav-link':'nav-link'}">Movie Booking</a></li>
+                <li class="nav-item"><a href="/adminUserList" th:class="${(link=='user')?'active nav-link':'nav-link'}">User</a></li>
+            </ul>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a href="/adminLogin" class="nav-link"><i class="fa fa-sign-out me-2"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

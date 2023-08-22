@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cinema | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="admin/navbar.html :: adminMenu(link='cinema')"></nav>
+<div class="container">
+    <h4 class="mt-4 mb-4">Cinema</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <div th:if="${msgsuc!=null}" class="alert alert-success" th:text="${msgsuc}"></div>
+            <div th:if="${msgerr!=null}" class="alert alert-danger" th:text="${msgerr}"></div>
+            <form method="post" action="/saveCinema" id="frmcinemaName">
+                <div class="row mb-3">
+                    <label class="col-md-3 text-sm-end" for="cinemaName">Cinema Name:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="cinemaName" name="cinemaName" placeholder="Cinema Name"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 offset-md-6">
+                        <button class="float-end btn btn-success"><i class="fa fa-save me-2"></i>Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td><b>Cinema Name</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cinem : ${cinemadata}">
+                        <td th:text="${cinem.cinemaId}"></td>
+                        <td th:text="${cinem.cinemaName}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="script.html"></script>
+<script>
+    $(document).ready(function () {
+        $("#frmcinemaName").validate({
+            errorClass: "text-danger",
+            rules: {
+                cinemaName: "required"
+            },
+            messages: {
+                cinemaName: "Enter Cinema Name"
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>
+</body>
+</html>

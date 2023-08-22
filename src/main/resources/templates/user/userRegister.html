@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Register | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="nav.html :: navigationForm(link='user')"></nav>
+<div class="container">
+    <form id="crtusercrtdata" method="post" autocomplete="off" action="/createUserAccount">
+        <div class="row">
+            <div class="col-md-11 mx-auto">
+                <div class="row mt-4">
+                    <h4 class="col-md-6">User Account Registration</h4>
+                    <div class="col-md-6">
+                        <a href="/userLogin" class="btn btn-primary float-end"><i class="fa fa-arrow-left me-1"></i>Login</a>
+                    </div>
+                </div>
+                <p>&nbsp;</p>
+                <div th:if="${msgsuc != null}" class="alert alert-success mb-5" th:text="${msgsuc}"></div>
+                <div th:if="${msgerr != null}" class="alert alert-danger mb-5" th:text="${msgerr}"></div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-4 text-sm-end" for="firstName">First Name:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                       maxlength="15" placeholder="First Name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-4 text-sm-end" for="lastName">Last Name:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                       maxlength="15" placeholder="Last Name"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-4 text-sm-end" for="phoneNumber">Phone Number:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                                       maxlength="11" placeholder="Phone Number"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-4 text-sm-end" for="emailAddress">Email Address:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="emailAddress" name="emailAddress"
+                                       placeholder="Email Address"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-4 text-sm-end" for="password">Password:</label>
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" id="password" name="password"
+                                       maxlength="10" placeholder="Password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-4 text-sm-end" for="confirmPassword">Confirm Password:</label>
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                                       maxlength="10" placeholder="Confirm Password"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="float-end">
+                            <button class="btn btn-success"><i class="fa fa-save me-1"></i>Post Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script th:replace="script.html"></script>
+<script>
+    $(document).ready(function () {
+        $("#crtusercrtdata").validate({
+            errorClass: "text-danger",
+            rules: {
+                firstName: "required",
+                lastName: "required",
+                phoneNumber: "required",
+                emailAddress: {
+                    required: true,
+                    email: true
+                },
+                password: "required",
+                confirmPassword: {required: true, equalTo: "#password"}
+            },
+            messages: {
+                firstName: "Enter First Name",
+                lastName: "Enter Last Name",
+                phoneNumber: "Enter Phone Number",
+                emailAddress: "Enter a valid Email Address",
+                password: "Enter Password",
+                confirmPassword: {required: "Enter Confirm Password", equalTo: "Password Miss-Mtach"},
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>
+</body>
+</html>

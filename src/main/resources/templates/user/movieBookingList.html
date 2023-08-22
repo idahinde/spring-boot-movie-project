@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Booking List | Cinema Booking System</title>
+    <link th:replace="links.html"/>
+</head>
+<body>
+<nav th:replace="user/userNav.html :: userNavigationLink(link='movbie-booking')"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Movie Ticket Booking List</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td><b>Booking ID</b></td>
+                        <td><b>Booking Date/Time</b></td>
+                        <td><b>Cinema</b></td>
+                        <td><b>Screen</b></td>
+                        <td><b>Image</b></td>
+                        <td><b>Title</b></td>
+                        <td><b>Release Date</b></td>
+                        <td><b>Show Cycle</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="movda : ${moviebookinglistdata}">
+                        <td th:text="${movda.bookingId}"></td>
+                        <td th:text="${movda.bookingDate+'/'+movda.bookingTime}"></td>
+                        <td th:text="${movda.movie.screen.cinema.cinemaName}"></td>
+                        <td th:text="${movda.movie.screen.type}"></td>
+                        <td><img th:src="${movda.movie.imageData}" width="55" height="55"/></td>
+                        <td th:text="${movda.movie.title}"></td>
+                        <td th:text="${movda.movie.releaseDate}"></td>
+                        <td th:text="${movda.movie.showCycle}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
